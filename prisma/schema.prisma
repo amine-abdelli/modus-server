@@ -14,23 +14,12 @@ model User {
   id                String    @id @default(uuid())
   email             String    @unique
   password          String
-  name              String?
   lastPasswordReset DateTime?
   last_activity     DateTime?
   createdAt         DateTime? @default(now())
-  dairies           Dairy[]
   profile           Profile?
-  mood              Mood[]
-}
-
-model Dairy {
-  id        String    @id @default(uuid())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  title     String    @db.VarChar(255)
-  content   String
+  moods             Mood[]
+  isAdmin           Boolean   @default(false)
 }
 
 model Mood {
@@ -38,12 +27,17 @@ model Mood {
   createdAt DateTime @default(now())
   rate      Int
   user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique
+  userId    String
+  phrase    String?
 }
 
 model Profile {
-  id     String  @id @default(uuid())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId String  @unique
+  id      String  @id @default(uuid())
+  name    String
+  bio     String?
+  age     Int?
+  gender  String?
+  country String?
+  user    User    @relation(fields: [userId], references: [id])
+  userId  String
 }
