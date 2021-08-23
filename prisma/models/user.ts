@@ -25,9 +25,12 @@ export interface OneUserByIdArgs {
 }
 
 async function oneUserById({ id }: OneUserByIdArgs, prisma: PrismaClient) {
-  return prisma.user.findUnique({
+  return await prisma.user.findUnique({
     where: {
       id,
+    },
+    include: {
+      moods: true,
     },
   });
 }
@@ -40,6 +43,9 @@ async function oneUserByEmail({ email }: OneUserByEmailArgs, prisma: PrismaClien
     where: {
       email,
     },
+    include: {
+      moods: true,
+    },
   });
 }
 
@@ -51,6 +57,7 @@ export interface UpdateUserByIdArgs {
     last_activity?: Date,
   }
 }
+
 async function updateOneUserById({ id, data }: UpdateUserByIdArgs, prisma: PrismaClient) {
   return prisma.user.update({
     where: {
