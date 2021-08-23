@@ -3,14 +3,14 @@ type User {
   id: ID!
   name: String
   email: String
-  diaries: [Dairy]
-  mood: [Mood]
+  moods: [Mood]
 }`;
 
 export const Mood = `
 type Mood {
   id: ID!
   rate: Int!
+  phrase: String
 }
 `;
 

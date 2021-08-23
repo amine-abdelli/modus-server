@@ -13,7 +13,6 @@ async function login(parent: any, { email, password }: LoginArgs, context: Conte
       email: formatEmail(email),
       password,
     }, context);
-    console.log(user);
     
     const token = createToken(user);
     context.res.cookie('session', token, COOKIE_SETTINGS);

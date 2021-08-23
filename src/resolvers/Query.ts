@@ -1,3 +1,3 @@
-import { hello, login, logout } from "./authentication";
+import { login, logout } from "./authentication";
 
-export default { hello, login, logout };
+export default { login, logout };

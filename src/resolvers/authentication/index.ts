@@ -1,6 +1,6 @@
 import { signup } from "./signup";
-import { hello } from "./hello";
 import { login } from "./login";
 import { logout } from "./logout";
+import { deleteUser } from "./deleteuser";
 
-export { signup, hello, login, logout};
+export { signup, login, logout, deleteUser};

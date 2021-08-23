@@ -8,6 +8,7 @@ export interface SignupArgs {
   email: string,
   rawPassword: string,
 }
+
 async function signup(parent: any, { email, rawPassword }: SignupArgs, context: Context) {
   try {
     const password = await bcrypt.hash(rawPassword, 10);
