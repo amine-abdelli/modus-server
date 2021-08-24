@@ -1,3 +1,3 @@
-import { login, logout } from "./authentication";
+import { login, logout, isLoggedIn } from "./authentication";
 
-export default { login, logout };
+export default { login, logout, isLoggedIn };
