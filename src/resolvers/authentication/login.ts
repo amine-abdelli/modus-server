@@ -3,10 +3,12 @@ import { formatEmail } from "src/utils/function";
 import { createToken, COOKIE_SETTINGS } from "src/utils/authUtils";
 import { updateOneUserById } from '../../../prisma/models/user';
 import { authenticateUser } from '../../resolvers/utils';
+
 interface LoginArgs {
   email: string,
   password: string,
 }
+
 async function login(parent: any, { email, password }: LoginArgs, context: Context) {
   try {
     const user = await authenticateUser({
@@ -15,7 +17,7 @@ async function login(parent: any, { email, password }: LoginArgs, context: Conte
     }, context);
     
     const token = createToken(user);
-    context.res.cookie('session', token, COOKIE_SETTINGS);
+    context.res.cookie('session_id', token, COOKIE_SETTINGS);    
     await updateOneUserById(
       { id: user.id, data: { last_activity: new Date() } },
       context.prisma,

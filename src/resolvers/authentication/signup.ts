@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import { formatEmail } from '../../utils/function';
 import { createToken, COOKIE_SETTINGS } from '../../utils/authUtils';
-import { createOneUser } from '../../../prisma/models/user';
+import { createOneUser, updateOneUserById } from '../../../prisma/models/user';
 import { Context } from '../utils';
 
 export interface SignupArgs {
@@ -16,6 +16,10 @@ async function signup(parent: any, { email, rawPassword }: SignupArgs, context: 
       email: formatEmail(email),
       password,
     }, context.prisma);
+    await updateOneUserById(
+      { id: user.id, data: { last_activity: new Date() } },
+      context.prisma,
+    );
     const token = createToken(user);
     context.res.cookie('session', token, COOKIE_SETTINGS);
     console.log('Signup success', { email });
