@@ -18,18 +18,6 @@ async function addOneMood({ userId, rate, phrase }: AddOneMoodArgs, prisma: Pris
     });
 }
 
-interface deleteOneUserByIdArgs {
-  id: string
-}
-
-async function deleteOneUserById({ id }: deleteOneUserByIdArgs, prisma: PrismaClient) {
-  return await prisma.user.delete({
-    where: {
-      id
-    }
-  })
-}
-
 async function findMoods({ userId }: any, prisma: PrismaClient) {
   return await prisma.mood.findMany({
     where: {
@@ -38,4 +26,4 @@ async function findMoods({ userId }: any, prisma: PrismaClient) {
   });
 }
 
-export { addOneMood, findMoods, deleteOneUserById };
+export { addOneMood, findMoods };

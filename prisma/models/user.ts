@@ -1,6 +1,7 @@
 import {
   PrismaClient,
 } from '@prisma/client';
+import { isDefinitionNode } from 'graphql';
 
 export interface CreateUserArgs {
   email: string,
@@ -23,7 +24,6 @@ async function createOneUser({email, password}: CreateUserArgs, prisma: PrismaCl
 export interface OneUserByIdArgs {
   id: string | undefined
 }
-
 async function oneUserById({ id }: OneUserByIdArgs, prisma: PrismaClient) {
   return await prisma.user.findUnique({
     where: {
@@ -57,7 +57,6 @@ export interface UpdateUserByIdArgs {
     last_activity?: Date,
   }
 }
-
 async function updateOneUserById({ id, data }: UpdateUserByIdArgs, prisma: PrismaClient) {
   return prisma.user.update({
     where: {
@@ -67,4 +66,20 @@ async function updateOneUserById({ id, data }: UpdateUserByIdArgs, prisma: Prism
   });
 }
 
-export { createOneUser, oneUserById, oneUserByEmail, updateOneUserById };
+interface deleteOneUserByIdArgs {
+  id: string
+}
+async function deleteOneUserById({ id }: deleteOneUserByIdArgs, prisma: PrismaClient) {
+  await prisma.mood.deleteMany({
+    where: {
+      userId: id,
+    }
+  })
+  return await prisma.user.delete({
+    where: {
+      id
+    }
+  })
+}
+
+export { createOneUser, oneUserById, oneUserByEmail, updateOneUserById, deleteOneUserById };
