@@ -14,12 +14,10 @@ export interface Context {
 export async function createContext(context: Context) {
   let userId;
   try {
-    userId = context.req.cookies && await getUserId(context.req, context.res, prisma);
+    userId = context.req.cookies && await getUserId(context.req, context.res, prisma);    
   } catch (e) {
-    // fail silently, as error handling will be done in other guards
     userId = '';
   }
-  // Useful for logger function context, and whoever wants to know who is the author of a request
   httpContext.set('userId', userId);
   return {
     ...context,
