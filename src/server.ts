@@ -5,8 +5,6 @@ import cookieParser from 'cookie-parser';
 import { Query, Mutation } from './resolvers/index';
 import { typeDefs } from './graphql/schemaTypeDefs';
 import { createContext } from './graphql/utils/context';
-import path from 'path';
-
 
 dotenv.config();
 
@@ -29,7 +27,7 @@ async function startServer(){
     app, 
     cors: {
       credentials: true,
-      origin:  "https://studio.apollographql.com" || process.env.FRONTEND_URL || 'http://localhost:3000',
+      origin: 'http://localhost:3000',
     }});
     
   app.use((req, res) => {
