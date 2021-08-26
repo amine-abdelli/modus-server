@@ -11,7 +11,7 @@ interface LoginArgs {
 
 async function login(parent: any, { email, password }: LoginArgs, context: Context) {
   try {
-    const user = await authenticateUser({
+     const user = await authenticateUser({
       email: formatEmail(email),
       password,
     }, context);

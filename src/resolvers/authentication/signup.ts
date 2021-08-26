@@ -21,7 +21,7 @@ async function signup(parent: any, { email, rawPassword }: SignupArgs, context: 
       context.prisma,
     );
     const token = createToken(user);
-    context.res.cookie('session', token, COOKIE_SETTINGS);
+    context.res.cookie('session_id', token, COOKIE_SETTINGS);
     console.log('Signup success', { email });
     return {
       user,
