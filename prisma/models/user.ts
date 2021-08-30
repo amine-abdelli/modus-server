@@ -55,6 +55,7 @@ export interface UpdateUserByIdArgs {
     password?: string,
     lastPasswordReset?: Date,
     last_activity?: Date,
+    name?: string
   }
 }
 async function updateOneUserById({ id, data }: UpdateUserByIdArgs, prisma: PrismaClient) {
@@ -82,4 +83,15 @@ async function deleteOneUserById({ id }: deleteOneUserByIdArgs, prisma: PrismaCl
   })
 }
 
-export { createOneUser, oneUserById, oneUserByEmail, updateOneUserById, deleteOneUserById };
+async function createUserName({ name, id }: any, prisma: PrismaClient) {
+  return await prisma.user.update({
+    where: {
+      id
+    },
+    data: {
+      name
+    }
+  });
+}
+
+export { createOneUser, oneUserById, oneUserByEmail, updateOneUserById, deleteOneUserById, createUserName };

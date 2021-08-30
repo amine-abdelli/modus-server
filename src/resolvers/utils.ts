@@ -27,6 +27,14 @@ async function authenticateUser({ email, password }: LoginVariables, context: Co
   return user;
 }
 
+function formatUserName(name: string){
+  return name.trim().replace(/\s\s+/g, ' ').split(' ').map((word) => {
+    return (
+    word.charAt(0).toUpperCase() + word.slice(1)
+    )
+  }).join(' '); 
+}
+
 export const prisma = new PrismaClient();
 
-export { authenticateUser };
+export { authenticateUser, formatUserName };
