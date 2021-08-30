@@ -21,3 +21,13 @@ type Dairy {
   Content: String
 }
 `;
+
+export const Profile = `
+type Profile {
+  id: ID!
+  name: String
+  bio: String
+  age: Int
+  gender: String
+  country: String
+}`;
