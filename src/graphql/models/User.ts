@@ -1,3 +1,4 @@
+
 export const User =`
 type User {
   id: ID!
@@ -11,6 +12,7 @@ type Mood {
   id: ID!
   rate: Int!
   phrase: String
+  createdAt: Date
 }
 `;
 

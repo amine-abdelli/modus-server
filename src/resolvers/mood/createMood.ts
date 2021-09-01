@@ -11,13 +11,13 @@ interface addOneMoodArgs {
 
 async function createMood(parent: any, { userId, rate, phrase }: addOneMoodArgs, context: Context) {
   try {
-    console.info('Trying to add a mood')
-    const user = await oneUserById({ id: userId }, context.prisma)
+    console.info('Trying to add a mood');
+    const user = await oneUserById({ id: userId }, context.prisma);
     if(!user) {
-      throw new ApolloError('User doesn\'t exist !')
+      throw new ApolloError('User doesn\'t exist !');
     }
-    await addOneMood({ userId, rate, phrase }, context.prisma)
-    console.info('Mood added successfully !')
+    await addOneMood({ userId, rate, phrase }, context.prisma);
+    console.info('Mood added successfully !');   
     return {
       user,
     };
