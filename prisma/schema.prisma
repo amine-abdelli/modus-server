@@ -20,16 +20,26 @@ model User {
   createdAt         DateTime? @default(now())
   profile           Profile?
   moods             Mood[]
+  dairies           Dairy[]
   isAdmin           Boolean   @default(false)
 }
 
+model Dairy {
+  id          String  @id @default(uuid())
+  createdAt   DateTime @default(now())
+  date        DateTime
+  dairy       String
+  User        User?   @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
 model Mood {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  rate      Int
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  phrase    String?
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  rate        Int
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  phrase      String?
 }
 
 model Profile {
