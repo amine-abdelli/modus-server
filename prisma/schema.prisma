@@ -20,15 +20,16 @@ model User {
   createdAt         DateTime? @default(now())
   profile           Profile?
   moods             Mood[]
-  dairies           Dairy[]
+  diaries           Diary[]
   isAdmin           Boolean   @default(false)
 }
 
-model Dairy {
+model Diary {
   id          String  @id @default(uuid())
   createdAt   DateTime @default(now())
   date        DateTime
-  dairy       String
+  title       String?
+  content     String
   User        User?   @relation(fields: [userId], references: [id])
   userId      String?
 }
