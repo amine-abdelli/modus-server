@@ -1,5 +1,5 @@
-import { User, Mood, Dairy } from './User';
+import { User, Mood, Diary } from './User';
 
 export default [
-  User, Mood, Dairy
+  User, Mood, Diary
 ];

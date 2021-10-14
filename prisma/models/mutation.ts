@@ -2,13 +2,20 @@ import {
   PrismaClient,
 } from '@prisma/client';
 
-export interface AddOneMoodArgs {
+export interface addOneMoodInterface {
   rate: number
   userId: string
   phrase: string
 }
 
-async function addOneMood({ userId, rate, phrase }: AddOneMoodArgs, prisma: PrismaClient) {
+export interface addOneDiaryInterface {
+  date: Date
+  userId: string
+  title?: string
+  content: string
+}
+
+async function addOneMood({ userId, rate, phrase }: addOneMoodInterface, prisma: PrismaClient) {
     return await prisma.mood.create({
       data: {
         rate,
@@ -16,6 +23,17 @@ async function addOneMood({ userId, rate, phrase }: AddOneMoodArgs, prisma: Pris
         phrase
       }
     });
+}
+
+async function addOneDiary({ userId, date, content, title }: addOneDiaryInterface, prisma: PrismaClient) {
+  return await prisma.diary.create({
+    data: {
+      date, 
+      content,
+      title,
+      userId,
+    }
+  });
 }
 
 async function findMoods({ userId }: any, prisma: PrismaClient) {
@@ -26,4 +44,4 @@ async function findMoods({ userId }: any, prisma: PrismaClient) {
   });
 }
 
-export { addOneMood, findMoods };
+export { addOneMood, findMoods, addOneDiary };

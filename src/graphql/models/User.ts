@@ -5,6 +5,7 @@ type User {
   name: String
   email: String
   moods: [Mood]
+  diaries: [Diary]
 }`;
 
 export const Mood = `
@@ -16,11 +17,13 @@ type Mood {
 }
 `;
 
-export const Dairy = `
-type Dairy {
-  id: ID!
-  title: String
-  Content: String
+export const Diary = `
+type Diary {
+  id:          ID!
+  createdAt:   Date
+  date:        Date
+  title:       String
+  content:     String
 }
 `;
 
